@@ -32,21 +32,18 @@ export interface JobPosting {
   id: string;
 }
 
-async function getJobs() {
-  const res = await fetch("/api/jobs");
-
-  return res.json();
-}
-
 export default async function Cards() {
   const [jobs, setData] = useState<JobPosting[]>([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/jobs")
+    fetch("https://job-listing-green-beta.vercel.app/api/jobs")
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <>
