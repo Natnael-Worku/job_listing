@@ -31,7 +31,7 @@ export interface JobPosting {
 }
 
 async function getJobs() {
-  const res = await fetch("/api");
+  const res = await fetch("/api/jobs");
 
   return res.json();
 }
