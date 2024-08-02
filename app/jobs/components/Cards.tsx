@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 
 interface IdealCandidateTraits {
@@ -37,8 +39,14 @@ async function getJobs() {
 }
 
 export default async function Cards() {
-  // fetch data
-  const jobs: JobPosting[] = await getJobs();
+  const [jobs, setData] = useState<JobPosting[]>([]);
+
+  useEffect(() => {
+    fetch("/api/jobs")
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
   return (
     <>
