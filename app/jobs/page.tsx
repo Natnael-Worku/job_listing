@@ -1,9 +1,13 @@
+import Header from "./components/Header";
 import Cards from "./components/Cards";
 
-export default function page() {
+const JobListPage = () => {
   return (
-    <div className="lg:mt-16 lg:ml-32 lg:mr-80">
+    <div className="lg:mt-16 lg:ml-16 lg:mr-72">
+      <Header />
       <Cards />
     </div>
   );
-}
+};
+
+export default JobListPage;

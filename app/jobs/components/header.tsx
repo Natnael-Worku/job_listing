@@ -2,7 +2,7 @@ const Header = () => {
   return (
     <div className="flex justify-between">
       <div>
-        <div className="text-textPrimary  font-black text-3xl">
+        <div className="text-textPrimary  font-black text-[32px]">
           Opportunities
         </div>
         <div className="text-textSecondary font-normal text-base">
