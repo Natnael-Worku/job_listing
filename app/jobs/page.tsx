@@ -1,13 +1,16 @@
-import Header from "./components/Header";
-import Cards from "./components/Cards";
+import Header from "@/components/Header";
+import Cards from "@/components/Cards";
+import getJobs from "@/Service/AllJobs";
 
-const JobListPage = () => {
+
+
+export default async function Page  ()  {
+  const {data,error}= await getJobs();
   return (
     <div className="lg:mt-16 lg:ml-16 lg:mr-72">
-      <Header />
-      <Cards />
+      <Header jobLength = {data.length} />
+      <Cards  data = {data}/>
     </div>
   );
 };
 
-export default JobListPage;

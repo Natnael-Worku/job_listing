@@ -1,4 +1,10 @@
-const Header = () => {
+
+
+interface props{
+  jobLength: number;
+}
+const Header = ({jobLength}:props) => {
+
   return (
     <div className="flex justify-between">
       <div>
@@ -6,7 +12,7 @@ const Header = () => {
           Opportunities
         </div>
         <div className="text-textSecondary font-normal text-base">
-          Showing 73 results
+          Showing {jobLength} results
         </div>
       </div>
       <div className="flex justify-center items-center">

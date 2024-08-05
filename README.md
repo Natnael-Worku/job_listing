@@ -3,11 +3,11 @@ A simple job portal website built with Next.js, TypeScript, and Tailwind CSS. It
 
 ## images of the pages
 ## /jobs
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](./screenshots/image.png)
+![alt text](./screenshots/image-1.png)
 ## /description/[id]
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](./screenshots/image-2.png)
+![alt text](./screenshots/image-3.png)
 
 ## Features
 Job Listings: Displays a list of available job positions.

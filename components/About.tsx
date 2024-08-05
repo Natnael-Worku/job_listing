@@ -1,9 +1,10 @@
-import job from "@/app/components/JobInterface"
-import {PrimaryTag, SecondaryTag } from "@/app/jobs/components/Tag"
+import {JobPosting} from "@/Types/Jobs"
+import {PrimaryTag, SecondaryTag } from "@/components/Tag"
 interface props {
-    data:job
+    data:JobPosting
 }
 const About = ({data}:props) => {
+  console.log(data)
   return (
     <>
     <section className="border-b border-b-gray-400 my-[10px]">
@@ -14,7 +15,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>Posted On</div>
-              <div>{data.about.posted_on}</div>
+              <div>{new Date(data.datePosted).toLocaleDateString()}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -23,7 +24,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>DeadLine</div>
-              <div>{data.about.deadline}</div>
+              <div>{new Date(data.deadline).toLocaleDateString()}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -32,7 +33,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>Location</div>
-              <div>{data.about.location}</div>
+              <div>{data.location?.join(',')}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -41,7 +42,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>Start Date</div>
-              <div>{data.about.start_date}</div>
+              <div>{  new Date(data.startDate).toLocaleDateString()}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -50,7 +51,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>End Date</div>
-              <div>{data.about.end_date}</div>
+              <div>{ new Date(data.endDate).toLocaleDateString()}</div>
             </div>
           </div>
         </section>
@@ -58,9 +59,17 @@ const About = ({data}:props) => {
 
         <section className="border-b border-b-gray-400 my-[10px]">
           <h2  className="font-black text-[24px]  text-textPrimary " > Categories</h2>
-          <div className="flex my-[20px]">
-            <PrimaryTag categorie = {data.about.categories[0]}/>
-            <SecondaryTag categorie = {data.about.categories[1]}/>
+          <div className="flex flex-wrap my-[20px]">
+            {
+              data.categories?.map((val,index)=>{
+                
+                  if (index % 2)
+                   return (<PrimaryTag categorie = {val}/>)
+
+                  return (<SecondaryTag categorie = {val}/>)
+                
+              })
+            }
           </div>
         </section>
 
@@ -68,7 +77,7 @@ const About = ({data}:props) => {
             <h2 className="font-black text-[24px]  text-textPrimary " > Required Skills</h2>
           <div className="flex flex-wrap mt-4 ">
             {
-              data.about.required_skills.map((val)=>{
+              data.requiredSkills?.map((val)=>{
                 return(
                   <SecondaryTag categorie = {val}/>
                 )
