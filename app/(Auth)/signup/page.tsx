@@ -83,7 +83,7 @@ const page = () => {
       (<div>
         
         <div className="flex w-full  flex-col  justify-center items-center ">
-         <h1 className="text-3xl font-black  py-3 bg-#202430 max-w-[90%]"> Sign Up Today! </h1>
+         <h1 className="text-3xl font-black  py-2 bg-#202430 max-w-[90%]"> Sign Up Today! </h1>
          <button
            className="w-50 flex items-center justify-center bg-white text-black font-bold py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none my-3 focus:shadow-outline"
            type="button"

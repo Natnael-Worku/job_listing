@@ -71,7 +71,7 @@ const Otp = (props:OTPprops) => {
 
   return (
 
-    <div className="flex flex-col items-center justify-center w-screen h-screen">
+    <div className="flex flex-col items-center justify-center w-[100%] h-screen">
       <div className="flex flex-col items-center justify-center w-[55%] md:w-[30%] gap-10">
         <div className="flex flex-col gap-4 items-center">
           <h1 className="text-3xl font-bold text-[#25324B] ">Verify Email</h1>
