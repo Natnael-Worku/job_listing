@@ -8,6 +8,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = async ({ children }) => 
   if (!session){
     redirect('/api/auth/signin?callbackUrl=/jobs')
   }
+   console.log(session)
     return (
         <section>
             
