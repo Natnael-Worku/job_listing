@@ -30,7 +30,7 @@ export const Options = {
                         headers: {'Content-Type': 'application/json'}
                     })
                     const user = await res.json();
-                    if (user){
+                    if (user && user.ok){
                         return user
                     }
                     else return null
