@@ -14,7 +14,8 @@ A simple job portal website built with Next.js, TypeScript, and Tailwind CSS. It
 ![Job Description](./screenshots/image-3.png)
 
 ## SignUp page
-    ![](./screenshots/signup.png)
+![](./screenshots/signup.png)
+
 
 ## OTP page
 ![](./screenshots/OTP.jpg)
