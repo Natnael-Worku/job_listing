@@ -23,14 +23,16 @@ export const Options = {
                 email: {label: "Username", placehlder:'enter your email',type: "text"},
                 password: {label: "Password", placeholder:'enter your password',type: "password"}
             },
-            async authorize (credentials: Record<"email" | "password", string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
+            async authorize (credentials) {
                     const res  = await fetch ('https://akil-backend.onrender.com/login',{
                         method: 'POST',
                         body: JSON.stringify(credentials),
                         headers: {'Content-Type': 'application/json'}
                     })
                     const user = await res.json();
-                    if (user && user.ok){
+                    console.log(user)
+                    if (user && res.ok){
+                        user['role'] = 'User'
                         return user
                     }
                     else return null

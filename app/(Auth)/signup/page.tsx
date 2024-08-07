@@ -53,7 +53,8 @@ const page = () => {
           }),
         });
   
-        if (!response.ok) {
+        if (!response.ok ) {
+          alert("error")
           throw new Error("Network response was not ok");
         }
   
