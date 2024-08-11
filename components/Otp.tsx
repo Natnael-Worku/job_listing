@@ -26,7 +26,7 @@ interface OTPprops{
 }
 const Otp = (props:OTPprops) => {
 //   const { session } = useSession();
-  console.log(props);
+  // console.log(props);
   const router = useRouter();
 
   const onChange: OTPInput["onChange"] = (text) => {
@@ -63,7 +63,7 @@ const Otp = (props:OTPprops) => {
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
-      router.push("/jobs");
+      router.push("/signin");
     }
   };
 

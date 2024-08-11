@@ -102,6 +102,7 @@ export default function Login() {
             <button
               onClick={handleSubmit(onSubmit)}
               className="w-[50%] rounded-lg text-white font-bold bg-[#4640DE] py-2"
+              data-testid= "login-button"
             >
               Login
             </button>

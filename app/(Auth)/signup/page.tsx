@@ -49,7 +49,7 @@ const page = () => {
             email: data.email,
             password: data.password,
             confirmpassword: data.confirmpassword,
-            role: "User",
+            role: "user",
           }),
         });
   
@@ -212,3 +212,6 @@ const page = () => {
 };
 
 export default page;
+
+
+// fodaxef584@mvpalace.com

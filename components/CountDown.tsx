@@ -55,7 +55,7 @@ export default function CountdownTimer(props:OTPprops) {
             }
       
             const result = await response.json();
-            console.log(result);
+            // console.log(result);
             // redirect("/jobs"); 
           } catch (error) {
             console.error("There was a problem with the fetch operation:", error);

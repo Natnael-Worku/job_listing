@@ -2,7 +2,7 @@ import {JobPosting} from "@/Types/Jobs";
 import Body from "./Body";
 import About from "./About";
 interface props {
-  data: JobPosting;
+  data: JobPosting | null;
 }
 
 const Description = ({ data }: props) => {

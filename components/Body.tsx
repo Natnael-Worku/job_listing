@@ -3,12 +3,12 @@ import { TiTick } from "react-icons/ti";
 import { IoLocationOutline } from "react-icons/io5";
 
 interface props {
-  data: JobPosting;
+  data: JobPosting | null;
 }
 
 const Body = ({ data }: props) => {
-  const listResponsibilities = data.responsibilities
-    ? data.responsibilities.split("\n")
+  const listResponsibilities = data?.responsibilities
+    ? data?.responsibilities.split("\n")
     : [];
 
   return (
@@ -18,7 +18,7 @@ const Body = ({ data }: props) => {
           Description
         </h2>
         <p className="mt-[16px] text-gray-800  text-[16px] font-normal text-justify mr-2 ">
-          {data.description}
+          {data?.description}
         </p>
       </section>
       <section className="my-[27px]">
@@ -49,7 +49,7 @@ const Body = ({ data }: props) => {
 
           <div className="flex items-center">
             <div className="font-black text-lg">.</div>
-            <span className="font-normal  ">{data.idealCandidate}</span>
+            <span className="font-normal  ">{data?.idealCandidate}</span>
           </div>
         </ul>
       </section>
@@ -61,7 +61,7 @@ const Body = ({ data }: props) => {
           <div className="border  border-gray-200 flex justify-center items-center rounded-full w-[40px] h-[40px]">
             <img src="/Images/Icon-location.svg" alt="loaction svg element" />
           </div>
-          <div className="ml-4">{data.whenAndWhere}</div>
+          <div className="ml-4">{data?.whenAndWhere}</div>
         </div>
       </section>
     </div>

@@ -9,11 +9,12 @@ export const Options = {
             clientSecret: process.env.GOOGLE_Secret!,
             
             profile(profile) {
-              let userRole = "Google User";
+              let userRole = "user";
               return {
                 ...profile,
                 id: profile.sub,
                 role: userRole,
+                
               };
             },
           }),
@@ -32,7 +33,8 @@ export const Options = {
                     const user = await res.json();
                     console.log(user)
                     if (user && res.ok){
-                        user['role'] = 'User'
+
+                        // user['role'] = 'user'
                         return user
                     }
                     else return null
@@ -43,15 +45,27 @@ export const Options = {
     ],
     callbacks: {
         async jwt ({token, user}: { token: any, user: any }) {
-            if (user) token.role = user.role;
+            if (user) {
+                token.role = user.role;
+                token.accessToken = user.data.accessToken;
+                token.refreshToken = user.refreshToken;
+                token.name = user.name;
+              }
             
             return token
         },
         async session({session, token}:{session:any, token:any}){
 
-            if (session?.user) session.user.role = token.role
+            if (session?.user){ 
+              session.user.role = token.role
+              session.accessToken = token.accessToken
+              session.refreshToken = token.refreshToken
+              session.name = token.name
+            }
             return session
         }
+      // console.log(session, "when sesssion called");
+      // return session;
     },
     pages:{
         signIn:'/signin',
