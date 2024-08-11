@@ -18,11 +18,11 @@ interface Data {
 // Rest of the code...
 
 const page = () => {
-    const session = useSession()
-    // console.log(session, "session object hi ");
-    if (session.status !== 'authenticated') {
-        redirect("/api/auth/signin?callbackUrl=/favorites")
-    }
+    // const session = useSession()
+    // // console.log(session, "session object hi ");
+    // if (session.status !== 'authenticated') {
+    //     redirect("/api/auth/signin?callbackUrl=/favorites")
+    // }
   const [data, setData] = useState<Data[] | undefined>();
   const [count , setCount] = useState <number>(0);
 
