@@ -12,7 +12,7 @@ interface IFormValues {
 }
 
 export default function Login() {
-  const form = useForm();
+  const form =  useForm <IFormValues>() ;
   const { register, formState, handleSubmit, reset } = form;
   const { errors } = formState as { errors: { name?: FieldError; email?: FieldError; password?: FieldError; confirmpassword?: FieldError; }; };
   const onSubmit = (data: IFormValues) => {

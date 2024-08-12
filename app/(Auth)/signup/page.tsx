@@ -24,7 +24,7 @@ const page = () => {
    })
    
    
-  const form = useForm();
+  const form = useForm <SignUpFormValues> ();
   const { register, formState, handleSubmit, reset } = form;
   const { errors } = formState as { errors: { name?: FieldError; email?: FieldError; password?: FieldError; confirmpassword?: FieldError; }; };
   const signInWithGoogle = async () => {

@@ -8,7 +8,7 @@ const NavBar = async () => {
   // console.log("get server session", session);
   return (
     <div className="flex justify-between py-6">
-      <div className="tetx-4xl font-bold text-[#4640DE] px-3">Akil</div>
+      <Link className="tetx-4xl font-bold text-[#4640DE] px-3" href={'/jobs'}>Akil</Link>
 
       <div className="flex gap-4">
         {session ? (
