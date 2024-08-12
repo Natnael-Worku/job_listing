@@ -11,7 +11,7 @@ import Data from "@/Types/BookmarkType";
 
 interface props {
     data: Data | undefined;
-    setId: React.Dispatch<React.SetStateAction<string>>;
+    setCount: React.Dispatch<React.SetStateAction<number>>;
     token: string;
 }
 /**
@@ -20,7 +20,7 @@ interface props {
  * @param setId - The function to set the ID.
  * @param token - The authorization token.
  */
-const FavoriteCard = ({data,setId,token}:props) => {
+const FavoriteCard = ({data,setCount,token}:props) => {
 //   const [isBookmarked, setIsBookmarked] = React.useState(true);
 const HandleBookmark = async () => {
     try {
@@ -37,7 +37,7 @@ const HandleBookmark = async () => {
         );
           console.log(res, "res");
         if (res.ok) {
-          setId(id);
+          setCount(prev => prev+1);
         //   setIsBookmarked(false);
         } else {
           console.log("error");
@@ -50,7 +50,7 @@ const HandleBookmark = async () => {
   };
     
   return (
-    <div className='relative'>
+    <div className='relative' data-testid= {"favorite-item"} >
 
 <div
         className="px-5  absolute top-3 right-0   cursor-pointer"
@@ -72,7 +72,7 @@ const HandleBookmark = async () => {
 
 
         <Link href={`/description/${data?.eventID}`  } passHref>
-            <div className='flex  felx-col gap-8 w-[800px]    rounded-lg border border-gray-500 shadow-md py-4 px-3'>
+            <div className='flex  felx-col gap-8 w-[550px] md:w-[800px]    rounded-lg border border-gray-500 shadow-md py-4 px-3'>
                 <img src={data?.logoUrl}
                 alt="logo image"
                 className='w-16 h-16 rounded-full'

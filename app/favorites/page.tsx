@@ -13,7 +13,7 @@ const page = () => {
   const session = useSession() as unknown as SessionType | null;
   const [token, setToken] = useState<string>("");
   const [data, setData] = useState<Data[] | undefined>();
-  const [id, setId] = useState<string>("");
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     setToken(session?.data?.accessToken ?? "");
@@ -25,20 +25,13 @@ const page = () => {
 
     fetchData();
 
-    const filtering = () => {
-      if (id) {
-        data?.filter(item => id !== item.eventID);
-      }
-    };
-
-    filtering();
-  }, [id, session?.data?.accessToken, data]);
+  }, [count, session?.data?.accessToken,data]);
 
   return (
     <div className="flex flex-col md:flex-row  gap-10 items-center  justify-center">
       <div className="flex flex-col gap-5 items-center justify-center">
         {data?.map((item, index) => {
-          return <FavoriteCard data={item} setId={setId} token={token} />;
+          return <FavoriteCard data={item} setCount={setCount} token={token} />;
         })}
       </div>
     </div>
