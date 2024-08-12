@@ -4,41 +4,40 @@ import React from 'react'
 import { Inperson, Remote } from './JobType';
 
 import { FaBookmark } from "react-icons/fa";
+import Data from "@/Types/BookmarkType";
 
-interface Data {
-    eventID: string;
-    title: string;
-    opType: string;
-    orgName: string;
-    datePosted: string;
-    dateBookmarked: string;
-    logoUrl: string;
-    location: string;
-}
+
 
 
 interface props {
     data: Data | undefined;
-    setCount: (val: number) => void;
+    setId: React.Dispatch<React.SetStateAction<string>>;
+    token: string;
 }
-const FavoriteCard = ({data,setCount}:props) => {
+/**
+ * Represents a FavoriteCard component.
+ * @param data - The data for the card.
+ * @param setId - The function to set the ID.
+ * @param token - The authorization token.
+ */
+const FavoriteCard = ({data,setId,token}:props) => {
 //   const [isBookmarked, setIsBookmarked] = React.useState(true);
 const HandleBookmark = async () => {
     try {
 
-
+      const id = data?.eventID as string;
         const res = await fetch(
           ` https://akil-backend.onrender.com/bookmarks/${data?.eventID}`,
           {
             method: "DELETE",
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessSession")}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
           console.log(res, "res");
         if (res.ok) {
-            setCount((prev:number)=>prev+1);
+          setId(id);
         //   setIsBookmarked(false);
         } else {
           console.log("error");
@@ -89,9 +88,9 @@ const HandleBookmark = async () => {
                                data?.opType === 'inPerson' ? <Inperson/> : <Remote/>
                             }
                         </div>
-                        <div className='flex flex-col gap-2'>
-                            <p className='text-xs font-light'> posted on :{ new Date(data?.datePosted).toLocaleDateString() }</p>
-                            <p className='text-xs font-light'> bookmarked  on :{ new Date(data?.dateBookmarked).toLocaleDateString() }</p>
+                        <div className='flex flex-col items-end gap-2'>
+                            <p className='text-xs font-light'> posted on :{ new Date(data?.datePosted ?? "").toLocaleDateString() }</p>
+                            <p className='text-xs font-light'> bookmarked  on :{ new Date(data?.dateBookmarked ?? "").toLocaleDateString() }</p>
                         </div>
                     </div>
                 </div>

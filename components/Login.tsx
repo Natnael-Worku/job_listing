@@ -1,6 +1,6 @@
 "use client";
 import react, { useState } from "react";
-import { FieldError, useForm } from "react-hook-form";
+import { FieldError, SubmitHandler, useForm, UseFormRegister, UseFormReset, useFormState } from "react-hook-form";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -22,7 +22,7 @@ export default function Login() {
       redirect: true,
       callbackUrl: "/jobs",
     });
-
+  
     // console.log(data);
   };
   const signInWithGoogle = async () => {
@@ -103,6 +103,7 @@ export default function Login() {
               onClick={handleSubmit(onSubmit)}
               className="w-[50%] rounded-lg text-white font-bold bg-[#4640DE] py-2"
               data-testid= "login-button"
+              type="submit"
             >
               Login
             </button>

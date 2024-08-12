@@ -2,49 +2,36 @@
 import Header from "@/components/Header";
 import Cards from "@/components/Cards";
 import getJobs from "@/Service/AllJobs";
-import { getServerSession } from "next-auth";
-import { Options } from "../api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
 import { getSession, useSession } from "next-auth/react";
 import { use, useEffect, useState } from "react";
-interface props {
-  token:string ;
-}
-export default function Page({token}:props) {
-  // const session = useSession();
-  // const [token, setToken] = useState("");
+import SessionType from "@/Types/SessionType";
+
+/**
+ * Renders the Page component.
+ *
+ * @returns The rendered Page component.
+ */
+export default function Page() {
+  const session = useSession() as unknown as SessionType | null;
+  const [token, setToken] = useState<string>("");
   const [data, setData] = useState([]);
-  // console.log(session, "session object hi ");
   useEffect(() => {
-    const y = async () => {
-      const session = await getSession();
-      // console.log(session, "session object from job page ");
-      // setToken(session?.accessToken);
-      localStorage.setItem("accessSession", session?.accessToken);
-    };
-    y();
+    setToken(session?.data?.accessToken ?? "");
+    // console.log(session?.data?.accessToken, "session object from job page ");
 
     const fetchJobs = async () => {
-    const res = await getJobs(localStorage.getItem("accessSession")?? '');
-    const items = res;
-    // console.log(items.data)
-    setData(items.data)
-  }
+      const res = await getJobs(session?.data?.accessToken ?? "");
+      setData(res.data);
+      // console.log(data, "data from page");
+    };
 
-  fetchJobs() 
-  });
-  // console.log(session.status, " hihihihi from here homepage ");
+    fetchJobs();
+  }, [session?.data?.accessToken, data]);
 
-  // if (!session) {
-  //   redirect("/api/auth/signin?callbackUrl=/jobs");
-  // }
-  // const { data, error } = use(getJobs(token));
-  // console.log(data, "data from page");
-  // console.log(token, "token from page");
   return (
     <div className="lg:mt-16 lg:ml-16 lg:mr-72">
-      <Header jobLength={data.length} />
-      <Cards data={data} token = {token} />
+      <Header jobLength={data?.length} />
+      <Cards data={data} token={token} />
     </div>
   );
 }

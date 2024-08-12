@@ -1,22 +1,24 @@
 import Card from "./Card";
 // import JobData from '@/_data/jobs.json'
 import { JobPosting } from "@/Types/Jobs";
-import getJobs from "@/Service/AllJobs";
 
 interface props {
   data: JobPosting[];
-  token:string
+  token: string;
 }
 
-export default function Cards({ data,token }: props) {
-  // fetch data
-
-  // console.log(jobs[0].id);
-
+/**
+ * Renders a list of cards based on the provided data.
+ *
+ * @param {Object[]} data - The array of job postings data.
+ * @param {string} token - The authentication token.
+ * @returns {JSX.Element} The rendered list of cards.
+ */
+export default function Cards({ data, token }: props) {
   return (
     <>
-      {data.map((job: JobPosting, index: number) => (
-        <Card job={job} key={job.id} />
+      {data?.map((job: JobPosting, index: number) => (
+        <Card job={job} key={job.id} token={token} />
       ))}
     </>
   );

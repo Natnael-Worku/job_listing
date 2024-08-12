@@ -1,8 +1,15 @@
 import {JobPosting} from "@/Types/Jobs"
 import {PrimaryTag, SecondaryTag } from "@/components/Tag"
 interface props {
-    data:JobPosting | null
+    data:JobPosting | null | undefined
 }
+/**
+ * Renders the About section of the job listing.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} props.data - The data object containing job information.
+ * @returns {JSX.Element} The rendered About section.
+ */
 const About = ({data}:props) => {
   // console.log(data)
   return (
@@ -15,7 +22,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>Posted On</div>
-              <div>{new Date(data?.datePosted).toLocaleDateString()}</div>
+              <div>{new Date(data?.datePosted ?? "").toLocaleDateString()}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -24,7 +31,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>DeadLine</div>
-              <div>{new Date(data?.deadline).toLocaleDateString()}</div>
+              <div>{new Date(data?.deadline ?? "").toLocaleDateString()}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -42,7 +49,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>Start Date</div>
-              <div>{  new Date(data?.startDate).toLocaleDateString()}</div>
+              <div>{  new Date(data?.startDate ?? "").toLocaleDateString()}</div>
             </div>
           </div>
           <div className="flex items-center my-[20px]">
@@ -51,7 +58,7 @@ const About = ({data}:props) => {
             </div>
             <div className="ml-4">
               <div>End Date</div>
-              <div>{ new Date(data?.endDate).toLocaleDateString()}</div>
+              <div>{ new Date(data?.endDate ?? "").toLocaleDateString()}</div>
             </div>
           </div>
         </section>

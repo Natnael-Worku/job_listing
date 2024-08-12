@@ -1,81 +1,66 @@
-// "use client";
+"use client";
 import React, { useEffect } from "react";
 import { Inperson, Remote } from "./JobType";
 import { PrimaryTag, SecondaryTag } from "./Tag";
 import Link from "next/link";
 import { JobPosting } from "@/Types/Jobs";
 import { FaBookmark } from "react-icons/fa";
-import { getSession, useSession } from "next-auth/react";
-
-// Define the main interface for a job posting
 
 interface props {
   job: JobPosting;
+  token: string;
 }
-const Card = ({ job }: props) => {
+/**
+ * Renders a card component for a job listing.
+ *
+ * @param job - The job object containing information about the job listing.
+ * @param token - The authentication token for the user.
+ */
+const Card = ({ job, token }: props) => {
   const [isBookmarked, setIsBookmarked] = React.useState(job.isBookmarked);
-  const [token, setToken] = React.useState("");
-  const { data }: { data: { accessToken?: string } & Session } = useSession();
-
-  // console.log(data, "data from card");
   useEffect(() => {
-    const y = async () => {
-      const session = await getSession();
-      // console.log(session, "session object from card made");
-      setToken(session?.accessToken);
-    };
-    y();
-  });
+    setIsBookmarked(job.isBookmarked);
+  }, [job]);
 
-  // console.log(data);
   const jobType = () => {
     if (job.opType === "inPerson") {
       return <Inperson />;
     }
     return <Remote />;
   };
+
   const HandleBookmark = async () => {
     try {
-      // console.log(token, "session object from card handle bookmark");
-
       if (isBookmarked) {
-        // console.log("true");
-
         const res = await fetch(
           ` https://akil-backend.onrender.com/bookmarks/${job.id}`,
           {
             method: "DELETE",
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessSession")}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-          console.log(res, "res");
+        console.log(res, "res");
         if (res.ok) {
           setIsBookmarked(false);
         } else {
           console.log("error");
-
         }
       } else {
-        // console.log("false");
         const res = await fetch(
           ` https://akil-backend.onrender.com/bookmarks/${job.id}`,
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessSession")}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-        console.log(res);
-        // console.log("i am here");
         if (res.ok) {
           setIsBookmarked(true);
         } else {
           const message = await res.json();
-          // console.log(message, "my message");
-          // console.log("error");
         }
       }
     } catch (error) {
@@ -89,18 +74,15 @@ const Card = ({ job }: props) => {
         className="px-5  absolute top-6 right-0  cursor-pointer"
         onClick={() => {
           HandleBookmark();
-          // console.log("clicked");
         }}
       >
         <FaBookmark
-        data-testid="bookmark-icon"
+          data-testid="bookmark-icon"
           className={
             "w-5 h-5  z-10 " +
-            (isBookmarked ? "text-yellow-400" : "text-gray-300" )
+            (isBookmarked ? "text-yellow-400" : "text-gray-300")
           }
-          // onClick={HandleBookmark}
         />
-        <p>{isBookmarked}</p>
       </div>
 
       <Link href={"/description/" + job.id} passHref>
@@ -124,10 +106,7 @@ const Card = ({ job }: props) => {
                   <span className="m-0 p-0 font-black">.</span>
                   <span className="font-normal font-base">
                     {" "}
-                    {
-                      // joinLocation()
-                      job.location.join(",")
-                    }
+                    {job.location.join(",")}
                   </span>
                 </div>
               </div>

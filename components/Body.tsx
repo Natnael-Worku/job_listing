@@ -3,9 +3,16 @@ import { TiTick } from "react-icons/ti";
 import { IoLocationOutline } from "react-icons/io5";
 
 interface props {
-  data: JobPosting | null;
+  data: JobPosting | null | undefined;
 }
 
+/**
+ * Renders the body component.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.data - The data object containing the information for rendering the body.
+ * @returns {JSX.Element} The rendered body component.
+ */
 const Body = ({ data }: props) => {
   const listResponsibilities = data?.responsibilities
     ? data?.responsibilities.split("\n")
